@@ -54,12 +54,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-               signInSignUpButton(context, false, (){
-                Firebase
+                signInSignUpButton(context, false, () {
+                  FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      email: _emailTextController.text,
+                      password: _passwordTextController.text).then((value) {
+                        
+                      });
 
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
-               }),
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                }),
                 signUpWithGoogle()
               ],
             ),
@@ -67,13 +71,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-
- Row signUpWithGoogle() {
+  Row signUpWithGoogle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Sign Up With ",
-            style: TextStyle(color: Colors.white70)),
+        const Text("Sign Up With ", style: TextStyle(color: Colors.white70)),
         GestureDetector(
           onTap: () {
             Navigator.push(context,
@@ -87,5 +89,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ],
     );
   }
-
 }
